@@ -4,34 +4,40 @@ import org.openqa.selenium.By;
 import webdriver.BaseForm;
 import webdriver.elements.CheckBox;
 import webdriver.elements.ComboBox;
+import webdriver.elements.Label;
 import webdriver.elements.TextBox;
-import org.openqa.selenium.support.ui.Select;
 
-/**
- * Created by Sergey on 18.03.2017.
- */
+import java.util.List;
+
+
 public class TvCatalogPage extends BaseForm {
 
-    private  CheckBox chbSumsung=new CheckBox(By.xpath("//label[@class=\"schema-filter__checkbox-item\"]/span[.='Samsung']/preceding-sibling::span"));
-    private TextBox txbMaxPrice=new TextBox(By.xpath("//input[@placeholder=\"до\"]"));
-    private TextBox txbDateFrom=new TextBox(By.xpath("//input[@placeholder=\"2010\"]"));
-    private ComboBox cmbSizeFrom=new ComboBox(By.xpath("//div[@class=\"schema-filter-control schema-filter-control_select\"]/select[contains(@data-bind,'from')]"));
-    private ComboBox cmbSizeTo=new ComboBox(By.xpath("//div[@class=\"schema-filter-control schema-filter-control_select\"]/select[contains(@data-bind,'to')]"));
-
+    String lblBrand ="//label[@class=\"schema-filter__checkbox-item\"]/span[.='%s']/preceding-sibling::span";
+    private TextBox txbMaxPrice=new TextBox(By.xpath("//input[@placeholder=\"до\"]"),"txbMaxPrice");
+    private TextBox txbDateFrom=new TextBox(By.xpath("//input[@placeholder=\"2010\"]"),"txbDateFrom");
+    private ComboBox cmbSizeFrom=new ComboBox(By.xpath("//div[@class=\"schema-filter-control schema-filter-control_select\"]/select[contains(@data-bind,'from')]"),"cmbSizeFrom");
+    private ComboBox cmbSizeTo=new ComboBox(By.xpath("//div[@class=\"schema-filter-control schema-filter-control_select\"]/select[contains(@data-bind,'to')]"),"cmbSizeTo");
+    private Label lblResultItem=new Label(By.xpath("//div[@class=\"schema-product__title\"]/a"),"lblResultItem");
 
     public TvCatalogPage(){
         super(By.xpath("//h1[contains(text(),'Телевизоры')]"),"Tv catalog page");
     }
 
-    public void searchTvByParams(){
-        chbSumsung.click();
-        txbMaxPrice.setText("1000");
-        txbDateFrom.setText("2013");
+    public void searchTvByParams(String brand,String maxPrice,String dateFrom, String sizeFrom, String sizeTo){
+
+        CheckBox chbBrand=new CheckBox(By.xpath(String.format(lblBrand,brand)));
+        chbBrand.click();
+        txbMaxPrice.setText(maxPrice);
+        txbDateFrom.setText(dateFrom);
         cmbSizeFrom.click();
-        cmbSizeFrom.selectByText("39\"");
+        cmbSizeFrom.selectByText(sizeFrom+"\"");
         cmbSizeTo.click();
-        cmbSizeTo.selectByText("42\"");
+        cmbSizeTo.selectByText(sizeTo+"\"");
 
 
+    }
+    public List<String> findLinks(){
+
+       return lblResultItem.getAllLinksFromList();
     }
 }

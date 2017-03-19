@@ -12,6 +12,7 @@ public abstract class BaseTest extends BaseEntity {
      * To override.
      */
     public abstract void runTest();
+  //  public abstract void runTest(String maxPrice,String dateFrom,String sizeFrom,String sizeTo);
 
     /**
      * Test

@@ -3,6 +3,12 @@
 	
 	<test name="Demo Test" preserve-order="true">
 		<classes>
+			<!-- Параметр для ДАННОГО теста -->
+			<parameter name="brand" value="Samsung"/>
+			<parameter name="maxPrice" value="1000"/>
+			<parameter name="dateFrom" value="2013"/>
+			<parameter name="sizeFrom" value="39"/>
+			<parameter name="sizeTo" value="42"/>
  			<class name="demo.tests.SearchTvTest" />
         </classes>
 	</test>

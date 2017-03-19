@@ -10,13 +10,13 @@ import webdriver.elements.TextBox;
  */
 public class MainPage extends BaseForm {
 
-       private Button btnCatalog = new Button(By.xpath("//span[contains(text(),'Каталог')]/.."));
+       private Button btnCatalog = new Button(By.xpath("//span[contains(text(),'Каталог')]/.."),"btnCatalog");
 
-    public MainPage() {
+       public MainPage() {
         super(By.xpath("//div[contains(@class,'main-page')]"),"Main Page");
     }
 
-    public void goToCatalog() {
+       public void goToCatalog() {
 
         btnCatalog.click();
     }
