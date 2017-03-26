@@ -18,14 +18,17 @@ public class TvPage extends BaseForm {
     public TvPage(){
         super(By.xpath("//h3[contains(text(),'Описание')]"),"Tv page");
     }
-    public void checkParameters(String brend,String smaxPrice,String sdateFrom,String ssizeFrom,String ssizeTo){
-        assertTrue(lblTitle.getText().contains(brend));
-
+    public void checkParameters(String brand,String smaxPrice,String sdateFrom,String ssizeFrom,String ssizeTo){
+        assertTrue(lblTitle.getText().contains(brand));
+        logger.info("Expected Result: brand name is "+brand);
+        logger.info("Actual result: brand name is "+brand);
         int maxPrice=Integer.valueOf(smaxPrice).intValue();
 
         if(lblNoPriceSecondary.isPresent()){
         String[] spriceFrom=lblPrice.getText().split(",");
         int priceFrom=Integer.valueOf(spriceFrom[0]).intValue();
+        logger.info("Expected Result: price less than "+maxPrice);
+        logger.info("Actual result: price = "+priceFrom);
         assertTrue(priceFrom<=maxPrice);
         }
         else {
@@ -36,6 +39,8 @@ public class TvPage extends BaseForm {
         String sdate=lblDate.getText().substring(0,4);
         int date=Integer.valueOf(sdate).intValue();
         int dateFrom=Integer.valueOf(sdateFrom).intValue();
+        logger.info("Expected Result: produced after "+dateFrom);
+        logger.info("Actual result: made in "+date);
         assertTrue(date>=dateFrom);
 
 
@@ -43,6 +48,8 @@ public class TvPage extends BaseForm {
         int size=Integer.valueOf(ssize).intValue();
         int sizeFrom=Integer.valueOf(ssizeFrom).intValue();
         int sizeTo=Integer.valueOf(ssizeTo).intValue();
+        logger.info("Expected Result: size larger than "+sizeFrom+" , but less than "+sizeTo);
+        logger.info("Actual result: size= "+size);
         assertTrue(size>=sizeFrom&&size<=sizeTo);
 
     }

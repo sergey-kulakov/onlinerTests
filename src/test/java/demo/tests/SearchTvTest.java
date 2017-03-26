@@ -2,6 +2,7 @@ package demo.tests;
 
 import demo.pages.*;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -12,15 +13,25 @@ import java.util.List;
 
 
 public class SearchTvTest extends BaseTest {
+    private String brand;
+    private String maxPrice;
+    private String dateFrom;
+    private String sizeFrom;
+    private String sizeTo;
 
-
+    @BeforeTest
+    @Parameters({"brand","maxPrice", "dateFrom", "sizeFrom", "sizeTo"})
+    public void setParameters(String brand,String maxPrice,String dateFrom,String sizeFrom,String sizeTo){
+        this.brand=brand;
+        this.maxPrice=maxPrice;
+        this.dateFrom=dateFrom;
+        this.sizeFrom=sizeFrom;
+        this.sizeTo=sizeTo;
+        System.out.println(brand);
+    }
 
     @Override
     public void runTest(){
-    }
-    @Test
-    @Parameters({"brand","maxPrice", "dateFrom", "sizeFrom", "sizeTo"})
-    public void serchTest(String brand,String maxPrice,String dateFrom,String sizeFrom,String sizeTo){
         logStep();
         MainPage mainPage = new MainPage();
         mainPage.goToCatalog();
@@ -40,7 +51,6 @@ public class SearchTvTest extends BaseTest {
             tvPage.checkParameters(brand, maxPrice,dateFrom,sizeFrom,sizeTo);
 
         }
-
-
     }
+
 }
